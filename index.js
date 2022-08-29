@@ -1,26 +1,45 @@
 // Code your solution in this file!
-function distanceFromHqInBlocks(param) {
-    if (param < 43) {
-      return 8;
+let dist;
+function distanceFromHqInBlocks(pickUpLocation){
+    const scuberHQ = 42;
+    if (scuberHQ >= pickUpLocation){
+        dist = scuberHQ - pickUpLocation;
+        return dist;
     }
-    return param - 42;
-  }
-  
-  function distanceFromHqInFeet(param) {
-    return distanceFromHqInBlocks(param) * 264;
-  }
-  function distanceTravelledInFeet(start, destination) {
-    return Math.abs(destination - start) * 264;
-  }
-  function calculatesFarePrice(start, destination) {
-    const distanceInFeet = distanceTravelledInFeet(start, destination);
-    if (distanceInFeet <= 400) {
-      return 0;
-    } else if (distanceInFeet > 400 && distanceInFeet <= 2000) {
-      return (distanceInFeet - 400) * 0.02;
-    } else if (distanceInFeet > 2000 && distanceInFeet <= 2500) {
-      return 25;
-    } else {
-      return "cannot travel that far";
+    else if (pickUpLocation > scuberHQ){
+        dist = pickUpLocation - scuberHQ;
+        return dist;
+    }   
+}
+
+function distanceFromHqInFeet(pickUpLocation){
+    const singleBlockInFeet = 264;
+    let newDist = distanceFromHqInBlocks(pickUpLocation);
+    return newDist*singleBlockInFeet;
+
+}
+
+function distanceTravelledInFeet(start,destination){
+    const singleBlockInFeet = 264;
+    if (start > destination){
+        dist = (start-destination)*singleBlockInFeet;
+        return dist;
     }
-  }
+    else dist = (destination-start)*singleBlockInFeet;
+    return dist;   
+}
+
+function calculatesFarePrice(start, destination){
+    dist = distanceTravelledInFeet(start,destination);
+    if (dist <= 400){
+        return(0);
+    }
+    else if(dist <=2000){
+        return((dist-400)*0.02);
+    }
+    else if (dist <= 2500){
+        return(25);
+    }
+    else return("cannot travel that far");
+
+} 
